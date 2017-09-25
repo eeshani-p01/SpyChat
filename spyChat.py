@@ -1,13 +1,27 @@
 from spy_details import spy_name,salu,spy_age,spy_rating
+import sys #system module
 
 print "Welcome to SpyChat!!"
 question = "Want to Continue as " + salu + " " + spy_name + "(Y/N)?"
 print question
 user_input = raw_input("Enter your choice\n")
 
+def start_chat(spy_name,spy_age,spy_rating):
+    menu_choices = "What do you want to do? \n 1. Add a status update\n"
+    choice = raw_input("menu_choices")
+
+    if choice == 1:
+        pass
+    else:
+        sys.exit()          #defined in system module
+
+
+
 if user_input == 'Y':
     #normal operation
-    pass    # a keyword to just pass the execution
+    print "Welcome %s  age: %d and rating of: %1f Proud to have you onboard" %(spy_name, spy_age, spy_rating)
+
+    start_chat(spy_name, spy_age, spy_rating)
 
 else:
     spy_name = raw_input("Hello dear ! Tell me your spy name :  \n")
@@ -38,6 +52,8 @@ else:
         spy_is_online = True
 
         print "Authentication complete.  Welcome %s  age: %d and rating of: %1f Proud to have you onboard" %(spy_name,spy_age,spy_rating)
+
+        start_chat(spy_name, spy_age, spy_rating)
 
     else:
         print "This spy doesn't exist !!"
