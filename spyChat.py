@@ -7,14 +7,27 @@ print question
 user_input = raw_input("Enter your choice\n")
 
 def start_chat(spy_name,spy_age,spy_rating):
-    menu_choices = "What do you want to do? \n 1. Add a status update\n"
-    choice = raw_input("menu_choices")
+    current_status = None
+    show_menu = True
 
-    if choice == 1:
-        pass
+    while show_menu:
+        menu_choices = "What do you want to do? \n 1. Add a status update\n 2. Close Application\n"
+        choice = raw_input(menu_choices)
+
+        if choice == 1:
+            # pass
+            add_status(current_status_message)
+        elif choice == 2:
+            show_menu = False
+        else:
+            sys.exit()          #defined in system module
+
+def add_status(current_status_message):
+
+    if current_status_message != None:
+      print "Your current status message is " + current_status_message + "\n"
     else:
-        sys.exit()          #defined in system module
-
+      print 'You don\'t have any status message currently \n'
 
 
 if user_input == 'Y':
