@@ -11,23 +11,33 @@ def start_chat(spy_name,spy_age,spy_rating):
     show_menu = True
 
     while show_menu:
-        menu_choices = "What do you want to do? \n 1. Add a status update\n 2. Close Application\n"
-        choice = raw_input(menu_choices)
+        print "What do you want to do? \n1. Add a status update \n2. Close Application\n"
+        menu_choice = input("Enter your choice\n")
 
-        if choice == 1:
-            # pass
-            add_status(current_status_message)
-        elif choice == 2:
+        if menu_choice == 1:
+            print 'You chose to update the status'
+            add_status(current_status)
+        elif  menu_choice == 2:
             show_menu = False
-        else:
-            sys.exit()          #defined in system module
 
-def add_status(current_status_message):
+STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
 
-    if current_status_message != None:
+def add_status(current_status):
+    if current_status !=None:
       print "Your current status message is " + current_status_message + "\n"
     else:
       print 'You don\'t have any status message currently \n'
+    default = raw_input("Do you want to select from the older status (y/n)? ")
+
+    if default.upper() == "N":
+        new_status_message = raw_input("What status message do you want to set?")
+
+        if len(new_status_message) > 0:
+            updated_status_message = new_status_message
+            STATUS_MESSAGES.append(updated_status_message)
+
+    # elif default.upper()=="Y":
+        
 
 
 if user_input == 'Y':
