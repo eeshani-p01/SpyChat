@@ -16,7 +16,7 @@ def start_chat(spy_name,spy_age,spy_rating):
 
         if menu_choice == 1:
             print 'You chose to update the status'
-            add_status(current_status)
+            current_status=add_status(current_status)
         elif  menu_choice == 2:
             show_menu = False
 
@@ -24,7 +24,7 @@ STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
 
 def add_status(current_status):
     if current_status !=None:
-      print "Your current status message is " + current_status_message + "\n"
+      print "Your current status message is " + current_status + "\n"
     else:
       print 'You don\'t have any status message currently \n'
     default = raw_input("Do you want to select from the older status (y/n)? ")
@@ -36,9 +36,16 @@ def add_status(current_status):
             updated_status_message = new_status_message
             STATUS_MESSAGES.append(updated_status_message)
 
-    # elif default.upper()=="Y":
-        
-
+    elif default.upper()=="Y":
+        index=1
+        for status in STATUS_MESSAGES:
+            print "{}.{}".format(index,status)
+            index=index+1
+        message_select=input("Select from the above status:\n")
+        if len(STATUS_MESSAGES)>=message_select:
+            updated_status_message = STATUS_MESSAGES[message_select-1]
+            print "Your status is updated."
+    return updated_status_message
 
 if user_input == 'Y':
     #normal operation
