@@ -3,10 +3,7 @@ import sys #system module
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
 
-friend_name=[]
-friend_age=[]
-friend_rating=[]
-friend_is_online=[]
+friends = []
 
 print "Welcome to SpyChat!!"
 question = "Do you want to continue as " + spy['salu'] + " " + spy['name'] + "(Y/N)?"
@@ -66,22 +63,26 @@ def add_status(current_status):
 
 def add_friend():
 
-    new_name = raw_input("Please enter your friend's name:")
-    new_salutation = raw_input("Are they Mr. or Ms.?: ")
-    new_name = new_name + " " + new_salutation
-    new_age = input("What's the age?")
-    new_rating = input("What is their Spy rating?")
+    new_friend = {
+        'name' : '',
+        'salu' : '',
+        'age' : 0,
+        'rating' : 0.0
+    }
 
-    if len(new_name)>0 and new_age>12:
-        friend_name.append(new_name)
-        friend_age.append(new_age)
-        friend_rating.append(new_rating)
-        friend_is_online.append(True)
+    new_friend['name'] = raw_input("Please enter your friend's name:")
+    new_friend['salu'] = raw_input("Are they Mr. or Ms.?: ")
+    new_friend['name'] = new_friend['salu'] + " " + new_friend['name']
+    new_friend['age'] = input("What's the age?")
+    new_friend['rating'] = input("What is their Spy rating?")
+
+    if len(new_friend['name'])>0 and new_friend['age']>12:
+        friends.append(new_friend)
         print "Friend Added !!"
     else:
         print "Sorry ! but we can't add this spy to your friend list. "
 
-    return len(friend_name)
+    return len(friends)
 
 
 
