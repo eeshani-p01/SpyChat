@@ -16,7 +16,7 @@ def start_chat(spy_name,spy_age,spy_rating):
     show_menu = True
 
     while show_menu:
-        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Close Application\n"
+        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3.Select a friend \n4. Close Application\n"
         menu_choice = input("Enter your choice\n")
 
         if menu_choice == 1:
@@ -25,7 +25,10 @@ def start_chat(spy_name,spy_age,spy_rating):
         elif menu_choice == 2:
             friend_no=add_friend()
             print "You have {} friends.".format(friend_no)
-        elif  menu_choice == 3:
+        elif menu_choice == 3:
+            friend_selected = select_friend()
+            print "you choose {}".format(friends[friend_selected]['name'])
+        elif  menu_choice == 4:
             show_menu = False
         else:
             sys.exit()
@@ -84,6 +87,16 @@ def add_friend():
 
     return len(friends)
 
+
+def select_friend():
+    item = 0
+    for friend in friends :
+        print "{}. {}".format(item+1,friend['name'])
+        item=item+1
+
+    select = input("With whom you want to chat? ")
+
+    return select-1
 
 
 if user_input.upper() == 'Y':
