@@ -2,6 +2,7 @@ from spy_details import spy_name,salu,spy_age,spy_rating
 import sys #system module
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
+
 friend_name=[]
 friend_age=[]
 friend_rating=[]
@@ -12,22 +13,24 @@ question = "Do you want to continue as " + salu + " " + spy_name + "(Y/N)?"
 print question
 user_input = raw_input("Enter your choice\n")
 
+
 def start_chat(spy_name,spy_age,spy_rating):
     current_status = None
     show_menu = True
 
     while show_menu:
-        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n 3. Close Application\n"
+        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Close Application\n"
         menu_choice = input("Enter your choice\n")
 
         if menu_choice == 1:
             print 'You chose to update the status'
             current_status=add_status(current_status)
         elif menu_choice == 2:
-            add_friend()
+            friend_no=add_friend()
+            print "You have {} friends.".format(friend_no)
         elif  menu_choice == 3:
             show_menu = False
-        else
+        else:
             sys.exit()
 
 
@@ -50,32 +53,39 @@ def add_status(current_status):
         for status in STATUS_MESSAGES:
             print "{}.{}".format(index,status)
             index=index+1
+
         message_select=input("Select from the above status:\n")
         if len(STATUS_MESSAGES)>=message_select:
             updated_status_message = STATUS_MESSAGES[message_select-1]
             print "Your status is updated."
         else:
             print "You didn't enter any status!!!"
+
     return updated_status_message
 
+
 def add_friend():
-    new_name = input("Please enter your friend's name:")
-    new_salutation = input("Are they Mr. or Ms.?: ")
+
+    new_name = raw_input("Please enter your friend's name:")
+    new_salutation = raw_input("Are they Mr. or Ms.?: ")
     new_name = new_name + " " + new_salutation
     new_age = input("What's the age?")
     new_rating = input("What is their Spy rating?")
-    if len(new_name)>0 and new_age>12 and new_rating>=spy_rating:
+
+    if len(new_name)>0 and new_age>12:
         friend_name.append(new_name)
         friend_age.append(new_age)
         friend_rating.append(new_rating)
         friend_is_online.append(True)
+        print "Friend Added !!"
     else:
         print "Sorry ! but we can't add this spy to your friend list. "
+        
     return len(friend_name)
 
 
 
-if user_input == 'Y':
+if user_input.upper() == 'Y':
     #normal operation
     print "Welcome %s  age: %d and rating of: %1f Proud to have you onboard" %(spy_name, spy_age, spy_rating)
 
