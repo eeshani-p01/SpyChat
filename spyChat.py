@@ -1,4 +1,4 @@
-from spy_details import spy_name,salu,spy_age,spy_rating
+from spy_details import spy_name,salu,spy_age,spy_rating,spy_is_online
 import sys #system module
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
@@ -80,7 +80,7 @@ def add_friend():
         print "Friend Added !!"
     else:
         print "Sorry ! but we can't add this spy to your friend list. "
-        
+
     return len(friend_name)
 
 
