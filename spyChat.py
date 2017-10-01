@@ -17,7 +17,7 @@ def start_chat(spy_name,spy_age,spy_rating):
     show_menu = True
 
     while show_menu:
-        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Select a friend \n4. Send message \n5. Close Application\n"
+        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Select a friend \n4. Send message \n5. Read message \n6. Close Application\n"
         menu_choice = input("Enter your choice\n")
 
         if menu_choice == 1:
@@ -31,7 +31,9 @@ def start_chat(spy_name,spy_age,spy_rating):
             print "you choose {}".format(friends[friend_selected]['name'])
         elif menu_choice == 4:
             send_message()
-        elif  menu_choice == 5:
+        elif menu_choice == 5:
+            read_message()
+        elif  menu_choice == 6:
             show_menu = False
         else:
             sys.exit()
@@ -113,9 +115,13 @@ def send_message():
     print "Your secret message has been sent to your friend."
 
 
-# def read_message():
-#     sender = select_friend()
-#
+def read_message():
+    sender = select_friend()
+
+    input_path = raw_input("What is the name of your secret image?\n")
+    secret_text = Steganography.decode(input_path)
+    print secret_text
+
 
 
 if user_input.upper() == 'Y':
