@@ -1,4 +1,5 @@
 from spy_details import spy
+from steganography.steganography import Steganography
 import sys #system module
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
@@ -16,7 +17,7 @@ def start_chat(spy_name,spy_age,spy_rating):
     show_menu = True
 
     while show_menu:
-        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3.Select a friend \n4. Close Application\n"
+        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Select a friend \n4. Send message \n5. Close Application\n"
         menu_choice = input("Enter your choice\n")
 
         if menu_choice == 1:
@@ -28,7 +29,9 @@ def start_chat(spy_name,spy_age,spy_rating):
         elif menu_choice == 3:
             friend_selected = select_friend()
             print "you choose {}".format(friends[friend_selected]['name'])
-        elif  menu_choice == 4:
+        elif menu_choice == 4:
+            send_message()
+        elif  menu_choice == 5:
             show_menu = False
         else:
             sys.exit()
@@ -97,6 +100,22 @@ def select_friend():
     select = input("With whom you want to chat? ")
 
     return select-1
+
+
+def send_message():
+    friend_choice = select_friend()
+
+    original_image = raw_input("What is the name of your image?\n ")
+    output_path = "hidden.jpg"
+    msg = raw_input("What is the secret message to your friend? \n")
+    Steganography.encode(original_image,output_path,msg)
+
+    print "Your secret message has been sent to your friend."
+
+
+# def read_message():
+#     sender = select_friend()
+#
 
 
 if user_input.upper() == 'Y':
