@@ -1,5 +1,6 @@
 from spy_details import spy
 from steganography.steganography import Steganography
+from datetime import datetime
 import sys #system module
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
@@ -111,6 +112,13 @@ def send_message():
     output_path = "hidden.jpg"
     msg = raw_input("What is the secret message to your friend? \n")
     Steganography.encode(original_image,output_path,msg)
+
+    new_chat = {
+        'message' : msg,
+        'time' : datetime.datetime.now(),
+        'sent_by_me' : True
+    }
+    friend[friend_choice]['chat'].append(new_chat)
 
     print "Your secret message has been sent to your friend."
 
