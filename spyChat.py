@@ -4,11 +4,11 @@ from datetime import datetime
 import sys #system module
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
-Spy = Spy('Bond','Mr.',23,5)
+spy = Spy('Bond','Mr.',23,5)
 friends = []
 
 print "Welcome to SpyChat!!"
-question = "Do you want to continue as " + Spy.salu + " " + Spy.name + "(Y/N)?"
+question = "Do you want to continue as " + spy.salu + " " + spy.name + "(Y/N)?"
 print question
 user_input = raw_input("Enter your choice\n")
 
@@ -22,7 +22,7 @@ def start_chat(spy_name,spy_age,spy_rating):
 
         if menu_choice == 1:
             print 'You chose to update the status'
-            Spy.current_status = add_status(Spy.current_status)
+            spy.current_status = add_status(spy.current_status)
         elif menu_choice == 2:
             friend_no=add_friend()
             print "You have {} friends.".format(friend_no)
@@ -71,21 +71,14 @@ def add_status(current_status):
 
 def add_friend():
 
-    new_friend = {
-        'name' : '',
-        'salu' : '',
-        'age' : 0,
-        'rating' : 0.0
-    }
-
-    new_friend['name'] = raw_input("Please enter your friend's name:")
-    new_friend['salu'] = raw_input("Are they Mr. or Ms.?: ")
-    new_friend['name'] = new_friend['salu'] + " " + new_friend['name']
-    new_friend['age'] = input("What's the age?")
-    new_friend['rating'] = input("What is their Spy rating?")
-
-    if len(new_friend['name'])>0 and new_friend['age']>12:
-        friends.append(new_friend)
+    # friend_name = raw_input("Please enter your friend's name:")
+    # fri = raw_input("Are they Mr. or Ms.?: ")
+    # new_friend['name'] = new_friend['salu'] + " " + new_friend['name']
+    # new_friend['age'] = input("What's the age?")
+    # new_friend['rating'] = input("What is their spy rating?")
+    newspy = Spy(raw_input("Please enter your friend's name:"),raw_input("Are they Mr. or Ms.?: "),input("What's the age?"),input("What is their Spy rating?"))
+    if len(newspy.name)>0 and newspy.age>12:
+        friends.append(spy)
         print "Friend Added !!"
     else:
         print "Sorry ! but we can't add this spy to your friend list. "
@@ -133,41 +126,37 @@ def read_message():
 
 if user_input.upper() == 'Y':
     #normal operation
-    print "Welcome %s  age: %d and rating of: %1f Proud to have you onboard" %(Spy.name, Spy.age, Spy.rating)
+    print "Welcome %s  age: %d and rating of: %1f Proud to have you onboard" %(spy.name, spy.age, spy.rating)
 
-    start_chat(Spy.name, Spy.age, Spy.rating)
+    start_chat(spy.name, spy.age, spy.rating)
 
 else:
-    Spy.name = raw_input("Hello dear ! Tell me your spy name :  \n")
-    if len(Spy.name)>0 :
-        Spy.salu = raw_input("What should I call you, Mr. or Mrs.? \n")
-        Spy.name = Spy.salu+" "+ Spy.name
-        print "Hello, " + Spy.name
+    name = raw_input("Hello dear ! Tell me your spy name :  \n")
+    if len(name)>0 :
+        salu = raw_input("What should I call you, Mr. or Mrs.? \n")
+        name = salu+" "+ name
+        print "Hello, " + name
 
-        Spy.age = 0
-        Spy.rating = 0.0
-        Spy.is_online = False
-
-        Spy.age=input("What is your age? ")
-        if Spy.age > 12 and Spy.age < 50 :
-            Spy.rating = input("What is your spy rating ? ")
+        age=input("What is your age? ")
+        if age > 12 and age < 50 :
+            rating = input("What is your spy rating ? ")
+            spy = Spy(name, salu, age, rating)
         else :
             print "Sorry, Your age doesn't fit to be a spy "
 
-        if Spy.rating > 4.5:
+        if rating > 4.5:
             print 'Great ace!'
-        elif Spy.rating > 3.5 and Spy.rating <= 4.5:
+        elif rating > 3.5 and rating <= 4.5:
             print 'You are one of the good ones.'
-        elif Spy.rating >= 2.5 and Spy.rating <= 3.5:
+        elif rating >= 2.5 and rating <= 3.5:
             print 'You can always do better'
         else:
             print 'We can always use somebody to help in the office.'
 
-        Spy.is_online = True
 
-        print "Authentication complete.  Welcome %s  age: %d and rating of: %1f Proud to have you onboard" %(Spy.name,Spy.age,Spy.rating)
+        print "Authentication complete.  Welcome %s  age: %d and rating of: %f Proud to have you onboard" %(spy.name,spy.age,spy.rating)
 
-        start_chat(Spy.name, Spy.age, Spy.rating)
+        start_chat(spy.name, spy.age, spy.rating)
 
     else:
         print "This spy doesn't exist !!"
