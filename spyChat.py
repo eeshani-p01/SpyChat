@@ -130,7 +130,7 @@ if user_input.upper() == 'Y':
 
 else:
     name = raw_input("Hello dear ! Tell me your spy name :  \n")
-    if len(name) > 0:
+    if len(name) > 0 and name.isalpha() == True:
         salu = raw_input("What should I call you, Mr. or Mrs.? \n")
         name = salu + " " + name
         print "Hello, " + name
@@ -152,10 +152,10 @@ else:
         else:
             print "Sorry, Your age doesn't fit to be a spy "
 
-        print "Authentication complete.  Welcome %s  age: %d and rating of: %f Proud to have you onboard" % (
+        print "Authentication complete.  Welcome %s, age: %d and rating of %.1f\n Proud to have you onboard." % (
         spy.name, spy.age, spy.rating)
 
         start_chat(spy.name, spy.age, spy.rating)
 
     else:
-        print "This spy doesn't exist !!"
+        print "Spy with this name doesn't exist !!"
