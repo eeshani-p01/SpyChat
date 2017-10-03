@@ -16,22 +16,22 @@ def start_chat(spy_name, spy_age, spy_rating):
     show_menu = True
 
     while show_menu:
-        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Select a friend \n4. Send message \n5. Read message \n6. Close Application\n"
+        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Send a secret message \n4. Read a secret message \n5.Read chats from a user \n6. Close Application\n"
         menu_choice = input("Enter your choice\n")
 
         if menu_choice == 1:
             print 'You chose to update the status'
             spy.current_status = add_status(spy.current_status)
+            print "Your current status is \n\t{}".format(spy.current_status)
         elif menu_choice == 2:
             friend_no = add_friend()
             print "You have {} friends.".format(friend_no)
         elif menu_choice == 3:
-            friend_selected = select_friend()
-            print "you choose {}".format(friends[friend_selected].name)
-        elif menu_choice == 4:
             send_message()
-        elif menu_choice == 5:
+        elif menu_choice == 4:
             read_message()
+        elif menu_choice == 5:
+            pass
         elif menu_choice == 6:
             show_menu = False
         else:
@@ -40,7 +40,7 @@ def start_chat(spy_name, spy_age, spy_rating):
 
 def add_status(current_status):
     if current_status is not None:
-        print "Your current status message is " + current_status + "\n"
+        print "Your current status message is \" " + current_status + " \"\n"
     else:
         print 'You don\'t have any status message currently \n'
     default = raw_input("Do you want to select from the older status (y/n)? ")
@@ -51,6 +51,8 @@ def add_status(current_status):
         if len(new_status_message) > 0:
             updated_status_message = new_status_message
             STATUS_MESSAGES.append(updated_status_message)
+        else :
+            print "I think, you don't want to update the status !!!"
 
     elif default.upper() == "Y":
         index = 1
@@ -64,6 +66,9 @@ def add_status(current_status):
             print "Your status is updated."
         else:
             print "You didn't enter any status!!!"
+
+    else :
+        print "Your input is invalid !!"
 
     return updated_status_message
 
@@ -93,7 +98,7 @@ def select_friend():
 
     select = input("With whom you want to chat? ")
 
-    return select - 1
+    print "you choose {}".format(friends[select-1].name)
 
 
 def send_message():
@@ -124,7 +129,7 @@ def read_message():
 if user_input.upper() == 'Y':
 
     # normal operation
-    print "Welcome %s  age: %d and rating of: %1f Proud to have you onboard" % (spy.name, spy.age, spy.rating)
+    print "Welcome %s  age: %d and rating of: %.1f \nProud to have you onboard" % (spy.name, spy.age, spy.rating)
 
     start_chat(spy.name, spy.age, spy.rating)
 
