@@ -1,5 +1,6 @@
 from spy_details import Spy, Chat
 from steganography.steganography import Steganography
+import csv
 import sys  # system module
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
@@ -14,6 +15,7 @@ user_input = raw_input("Enter your choice\n")
 
 def start_chat(spy_name, spy_age, spy_rating):
     show_menu = True
+    load_message()
 
     while show_menu:
         print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Send a secret message \n4. Read a secret message \n5.Read chats from a user \n6. Close Application\n"
@@ -25,7 +27,7 @@ def start_chat(spy_name, spy_age, spy_rating):
             print "Your current status is \n\t{}".format(spy.current_status)
         elif menu_choice == 2:
             friend_no = add_friend()
-            print "You have {} friends.".format(friend_no)
+            print "You have {} friends.".format(friend_no-1)
         elif menu_choice == 3:
             send_message()
         elif menu_choice == 4:
@@ -51,7 +53,7 @@ def add_status(current_status):
         if len(new_status_message) > 0:
             updated_status_message = new_status_message
             STATUS_MESSAGES.append(updated_status_message)
-        else :
+        else:
             print "I think, you don't want to update the status !!!"
 
     elif default.upper() == "Y":
@@ -67,7 +69,7 @@ def add_status(current_status):
         else:
             print "You didn't enter any status!!!"
 
-    else :
+    else:
         print "Your input is invalid !!"
 
     return updated_status_message
@@ -98,7 +100,7 @@ def select_friend():
 
     select = input("With whom you want to chat? ")
 
-    print "you choose {}".format(friends[select-1].name)
+    print "you choose {}".format(friends[select - 1].name)
 
 
 def send_message():
@@ -124,6 +126,15 @@ def read_message():
     new_chat = Chat(secret_text, False)
     friends[sender].chats.append(new_chat)
     print "Your secret message has been saved!"
+
+
+def load_message():
+    with open("friends.csv", "rb") as friends_data:
+        reader = csv.reader(friends_data)
+
+        for row in reader:
+            spy1 = Spy(row[1], row[2], row[3], row[4])
+            friends.append(spy1)
 
 
 if user_input.upper() == 'Y':
@@ -158,7 +169,7 @@ else:
             print "Sorry, Your age doesn't fit to be a spy "
 
         print "Authentication complete.  Welcome %s, age: %d and rating of %.1f\n Proud to have you onboard." % (
-        spy.name, spy.age, spy.rating)
+            spy.name, spy.age, spy.rating)
 
         start_chat(spy.name, spy.age, spy.rating)
 
