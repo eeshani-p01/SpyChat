@@ -27,7 +27,7 @@ def start_chat(spy_name, spy_age, spy_rating):
             print "Your current status is \n\t{}".format(spy.current_status)
         elif menu_choice == 2:
             friend_no = add_friend()
-            print "You have {} friends.".format(friend_no-1)
+            print "You have {} friends.".format(friend_no)
         elif menu_choice == 3:
             send_message()
         elif menu_choice == 4:
@@ -81,10 +81,14 @@ def add_friend():
     # new_friend['name'] = new_friend['salu'] + " " + new_friend['name']
     # new_friend['age'] = input("What's the age?")
     # new_friend['rating'] = input("What is their spy rating?")
+
     newspy = Spy(raw_input("Please enter your friend's name:"), raw_input("Are they Mr. or Ms.?: "),
                  input("What's the age?"), input("What is their Spy rating?"))
-    if len(newspy.name) > 0 and newspy.age > 12:
+    if (newspy.name.isalpha()==True or newspy.name.isalnum()==True) and newspy.age > 12:
         friends.append(newspy)
+        with open("friends.csv.txt","a") as friends_data:
+            writer = csv.writer(friends_data)
+            writer.writerow([newspy.name,newspy.salu,newspy.age,newspy.rating,True])
         print "Friend Added !!"
     else:
         print "Sorry ! but we can't add this spy to your friend list. "
@@ -101,6 +105,7 @@ def select_friend():
     select = input("With whom you want to chat? ")
 
     print "you choose {}".format(friends[select - 1].name)
+    return select-1
 
 
 def send_message():
@@ -129,12 +134,21 @@ def read_message():
 
 
 def load_message():
-    with open("friends.csv", "rb") as friends_data:
-        reader = csv.reader(friends_data)
+    with open("friends.csv.txt", "rb") as friends_data:
+        reader = list(csv.reader(friends_data))
 
-        for row in reader:
-            spy1 = Spy(row[1], row[2], row[3], row[4])
+        for row in reader[1:]:
+            spy1 = Spy(row[0],row[1],row[2],row[3])
             friends.append(spy1)
+
+
+# def load_message():
+#     with open("chat.csv", "rb") as Chats:
+#         reader = list(csv.reader(Chats))
+#
+#         for row in reader[1:]:
+#             spy1 = Spy(row[0],row[1],row[2],row[3])
+#             friends.append(spy1)
 
 
 if user_input.upper() == 'Y':
@@ -146,7 +160,7 @@ if user_input.upper() == 'Y':
 
 else:
     name = raw_input("Hello dear ! Tell me your spy name :  \n")
-    if len(name) > 0 and name.isalpha() == True:
+    if len(name) > 0 and (name.isalpha() == True or name.isalnum() == True):
         salu = raw_input("What should I call you, Mr. or Mrs.? \n")
         name = salu + " " + name
         print "Hello, " + name
