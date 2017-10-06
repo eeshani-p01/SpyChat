@@ -9,8 +9,7 @@ friends = []
 
 print "Welcome to SpyChat!!"
 question = "Do you want to continue as " + spy.salu + " " + spy.name + "(Y/N)?"
-print question
-user_input = raw_input("Enter your choice\n")
+user_input = raw_input(question)
 
 
 def start_chat(spy_name, spy_age, spy_rating):
@@ -18,7 +17,7 @@ def start_chat(spy_name, spy_age, spy_rating):
     load_message()
 
     while show_menu:
-        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Send a secret message \n4. Read a secret message \n5.Read chats from a user \n6. Close Application\n"
+        print "What do you want to do? \n1. Add a status update \n2. Add a friend\n3. Send a secret message \n4. Read a secret message \n5. Read chats from a user \n6. Close Application\n"
         menu_choice = input("Enter your choice\n")
 
         if menu_choice == 1:
@@ -116,8 +115,11 @@ def send_message():
     msg = raw_input("What is the secret message to your friend? \n")
     Steganography.encode(original_image, output_path, msg)
 
-    new_chat = Chat(msg, True)
+    new_chat = Chat(msg, spy.name)
     friends[friend_choice].chats.append(new_chat)
+    with open("chat.csv.txt", "a") as chats_data:
+        chater = csv.writer(chats_data)
+        chater.writerow([friends[friend_choice].name, new_chat.message, new_chat.sent_by,new_chat.time ])
 
     print "Your secret message has been sent to your friend."
 
