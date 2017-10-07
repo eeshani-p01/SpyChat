@@ -14,6 +14,7 @@ user_input = raw_input(question)
 
 def start_chat(spy_name, spy_age, spy_rating):
     show_menu = True
+    load_friends()
     load_message()
 
     while show_menu:
@@ -32,7 +33,7 @@ def start_chat(spy_name, spy_age, spy_rating):
         elif menu_choice == 4:
             read_message()
         elif menu_choice == 5:
-            pass
+            read_chats()
         elif menu_choice == 6:
             show_menu = False
         else:
@@ -135,7 +136,7 @@ def read_message():
     print "Your secret message has been saved!"
 
 
-def load_message():
+def load_friends():
     with open("friends.csv.txt", "rb") as friends_data:
         reader = list(csv.reader(friends_data))
 
@@ -144,13 +145,19 @@ def load_message():
             friends.append(spy1)
 
 
-# def load_message():
-#     with open("chat.csv", "rb") as Chats:
-#         reader = list(csv.reader(Chats))
-#
-#         for row in reader[1:]:
-#             spy1 = Spy(row[0],row[1],row[2],row[3])
-#             friends.append(spy1)
+def load_message():
+    with open("chat.csv.txt", "rb") as chats_data:
+        reader = list(csv.reader(chats_data))
+
+        for row in reader[1:]:
+            chatDetails = Chat(row[1],row[2])
+            spy.chats.append(chatDetails)
+
+
+def read_chats():
+    item=1
+    for chat in spy.chats:
+        print "{}. {}".format(chat.time,chat.message)
 
 
 if user_input.upper() == 'Y':
