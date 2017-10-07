@@ -1,6 +1,8 @@
 from spy_details import Spy, Chat
 from steganography.steganography import Steganography
 import csv
+from termcolor import cprint
+from colorama import Fore, Back
 import sys  # system module
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
@@ -157,7 +159,9 @@ def load_message():
 def read_chats():
     item=1
     for chat in spy.chats:
-        print "{}. {}".format(chat.time,chat.message)
+        cprint (chat.sent_by,'red')
+        print(Fore.BLACK  + chat.message)
+        cprint (chat.time,'blue')
 
 
 if user_input.upper() == 'Y':
