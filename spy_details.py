@@ -14,10 +14,6 @@ class Chat:
         self.time = datetime.now().strftime("%b %d %Y %H:%M:%S")
         self.sent_by_me = sent_by_me
 
-# chats = []
-# chat_details = Chat("Hey","ME")
-# chats.append(chat_details)
-# print chats
 
 class Spy:
 
