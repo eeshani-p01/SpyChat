@@ -8,6 +8,7 @@ import sys  # system module
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
 spy = Spy('Bond', 'Mr.', 23, 5)
 friends = []
+special_msg = ["SOS","SAVE","HELP"]
 
 print "Welcome to SpyChat!!"
 question = "Do you want to continue as " + spy.salu + " " + spy.name + "(Y/N)?"
@@ -116,6 +117,13 @@ def send_message():
     original_image = raw_input("What is the name of your image?\n ")
     output_path = "hidden.jpg"
     msg = raw_input("What is the secret message to your friend? \n")
+    msg_new = msg.upper()
+    msg_new = msg_new.split(" ")
+    for val in msg_new:
+        if val in special_msg:
+            print "You should see the message immediately, there can be emergency!!!!"
+
+
     Steganography.encode(original_image, output_path, msg)
 
     new_chat = Chat(friends[friend_choice].name, msg, True)
@@ -133,7 +141,7 @@ def read_message():
     input_path = raw_input("What is the name of your secret image?\n")
     secret_text = Steganography.decode(input_path)
 
-    new_chat = Chat(secret_text, False)
+    new_chat = Chat(friends[sender],secret_text, False)
     friends[sender].chats.append(new_chat)
     print "Your secret message has been saved!"
 
