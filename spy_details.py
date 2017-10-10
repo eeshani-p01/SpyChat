@@ -8,10 +8,11 @@ from datetime import datetime
 # }
 class Chat:
 
-    def __init__(self, message, sent_by):
+    def __init__(self, name, message, sent_by_me):
+        self.name = name
         self.message = message
         self.time = datetime.now().strftime("%b %d %Y %H:%M:%S")
-        self.sent_by = sent_by
+        self.sent_by_me = sent_by_me
 
 # chats = []
 # chat_details = Chat("Hey","ME")

@@ -1,8 +1,8 @@
 name, salu, age, rating, is_online
-IronMan , Mr., 23, 5, True
-BlackWidow, Ms., 21, 4.3, True
-CaptainAmerica, Mr., 24, 4.5, True
-SherlockHomes, Mr., 25, 4.2, True
+IronMan,Mr.,23,5,True
+BlackWidow,Ms.,21,4.3,True
+CaptainAmerica,Mr.,24,4.5,True
+SherlockHomes,Mr.,25,4.2,True
 James007,Mr.,27,5,True
 DracoHacker,Mr.,23,3,True
-
+Scarlett,MRs.,21,3.8,True

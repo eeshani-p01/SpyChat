@@ -2,7 +2,7 @@ from spy_details import Spy, Chat
 from steganography.steganography import Steganography
 import csv
 from termcolor import cprint
-from colorama import Fore, Back
+from colorama import Fore
 import sys  # system module
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
@@ -118,11 +118,11 @@ def send_message():
     msg = raw_input("What is the secret message to your friend? \n")
     Steganography.encode(original_image, output_path, msg)
 
-    new_chat = Chat(msg, spy.name)
+    new_chat = Chat(friends[friend_choice].name, msg, True)
     friends[friend_choice].chats.append(new_chat)
     with open("chat.csv.txt", "a") as chats_data:
         chater = csv.writer(chats_data)
-        chater.writerow([friends[friend_choice].name, new_chat.message, new_chat.sent_by,new_chat.time ])
+        chater.writerow([new_chat.name, new_chat.message, new_chat.sent_by_me, new_chat.time])
 
     print "Your secret message has been sent to your friend."
 
@@ -152,16 +152,18 @@ def load_message():
         reader = list(csv.reader(chats_data))
 
         for row in reader[1:]:
-            chatDetails = Chat(row[1],row[2])
+            chatDetails = Chat(row[0],row[1],row[2])
             spy.chats.append(chatDetails)
 
 
 def read_chats():
-    item=1
-    for chat in spy.chats:
-        cprint (chat.sent_by,'red')
-        print(Fore.BLACK  + chat.message)
-        cprint (chat.time,'blue')
+    if(len(spy.chats)<1):
+        print "You do not have any history with this friend."
+    else:
+        for chat in spy.chats:
+            cprint(chat.name, 'red')
+            print(Fore.BLACK + chat.message)
+            cprint(chat.time, 'blue')
 
 
 if user_input.upper() == 'Y':
